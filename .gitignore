@@ -1,0 +1,35 @@
+# Generated data (fetched at runtime from OpenML — never committed)
+data/*.csv
+
+# Generated figures / outputs
+figures/
+outputs/
+*.png
+*.pdf
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Intake provenance (maintainer-only, never published)
+.intake-provenance.local
