@@ -1,0 +1,10 @@
+# Core runtime dependencies for the engine.
+# Canonical source of truth is pyproject.toml. Prefer `pip install -e .`.
+# Plotting experiments additionally need the `viz` extra: `pip install -e ".[viz]"`.
+numpy>=1.24,<3
+pandas>=2.0,<3
+scipy>=1.10,<2
+scikit-learn>=1.3,<2
+
+# Plotting only (installed via the `viz` extra in pyproject.toml):
+matplotlib>=3.7,<4

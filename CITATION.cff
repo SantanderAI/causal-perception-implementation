@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the accompanying paper. The German Credit dataset must be cited separately (see data/README.md)."
+title: "causal-perception-implementation: experiments on causal perception with structural causal models"
+abstract: "Research code for causal-perception experiments: comparing competing structural causal models through interventional and counterfactual distributions, with interventional/counterfactual distances (Wasserstein-2, KL, Total Variation) and fairness metrics on the German Credit dataset."
+type: software
+url: "https://github.com/SantanderAI/causal-perception-implementation"
+repository-code: "https://github.com/SantanderAI/causal-perception-implementation"
+license: Apache-2.0
+authors:
+  - family-names: "Álvarez"
+    given-names: "José Manuel"
+    email: "j.alvarez@gruposantander.com"
+    affiliation: "Santander AI Lab"
+preferred-citation:
+  type: article
+  title: "Causal Perception"
+  year: 2026
+  notes: "Forthcoming / under review. Update title, venue, volume/issue/pages and DOI once the paper is published."
+  authors:
+    - family-names: "Álvarez"
+      given-names: "José Manuel"
+  # TODO: add venue + volume/issue/pages/DOI once the paper is published.
+references:
+  - type: data
+    title: "Statlog (German Credit Data)"
+    authors:
+      - family-names: "Hofmann"
+        given-names: "Hans"
+    year: 1994
+    publisher:
+      name: "UCI Machine Learning Repository"
+    doi: "10.24432/C5NC77"
+    notes: "Original German Credit dataset. Fetched at runtime via OpenML dataset 'credit-g' (https://www.openml.org/d/31)."
+  - type: conference-paper
+    title: "Path-Specific Counterfactual Fairness"
+    authors:
+      - family-names: "Chiappa"
+        given-names: "Silvia"
+    year: 2019
+    collection-title: "Proceedings of the AAAI Conference on Artificial Intelligence, 33(01)"
+    notes: "Source of the causal DAG over the German Credit variables used here."

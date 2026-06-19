@@ -1,0 +1,41 @@
+causal-perception-implementation
+Copyright (c) 2026 José M. Álvarez
+
+This is the research code accompanying a paper on causal perception (the
+comparison of competing structural causal models through the lens of
+interventional and counterfactual distributions). The copyright is held by
+the author(s) of the paper.
+
+This open-source release is distributed and maintained by Santander AI Lab
+with the author's consent. The CI/CD, governance and security infrastructure
+added for this release (files under .github/) is Copyright (c) 2026
+Santander Group.
+
+This product is licensed under the Apache License, Version 2.0 (the "License");
+you may not use this product except in compliance with the License.
+A copy of the License is included in the LICENSE file at the root of this
+repository and is also available at:
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations
+under the License.
+
+-------------------------------------------------------------------------------
+Third-party data (NOT redistributed in this repository)
+
+This repository contains code for experiments that rely on the German Credit
+(Statlog) dataset. That dataset is third-party data and is NOT included or
+redistributed here; it is fetched at runtime from OpenML by the data
+preparation script (src/data_prep.py). See data/README.md for provenance, the
+variable mapping, and citation:
+
+  - Hofmann, H. (1994). Statlog (German Credit Data).
+    UCI Machine Learning Repository. https://doi.org/10.24432/C5NC77
+    Also available as OpenML dataset "credit-g" (https://www.openml.org/d/31).
+  - Chiappa, S. (2019). Path-Specific Counterfactual Fairness.
+    Proceedings of the AAAI Conference on Artificial Intelligence, 33(01).
+    Source of the causal DAG over the German Credit variables used here.
