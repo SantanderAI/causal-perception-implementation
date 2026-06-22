@@ -18,48 +18,13 @@ Outputs:
 import os
 
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 from sklearn.metrics import auc, average_precision_score, precision_recall_curve, roc_curve
 
 from src.data_prep import load_data
+from src.fairness import decision_disagreement, fairness_metrics
 from src.linear_anm import CHIAPPA_FULL, CHIAPPA_NO_AY
 from src.perception import fit_scms
-
-
-def fairness_metrics(y_true, y_hat, a, tau=0.5):
-    """Compute fairness metrics for a single receiver.
-
-    Returns dict with acceptance rates, DP gap, TPR/FPR by group, EO gaps.
-    """
-    d = (y_hat >= tau).astype(int)
-    female = a == 0
-    male = a == 1
-
-    accept_f = np.mean(d[female])
-    accept_m = np.mean(d[male])
-    accept_all = np.mean(d)
-    dp_gap = accept_f - accept_m  # signed: positive = females accepted more
-
-    # TPR = P(D=1 | Y=1, A=a)
-    tpr_f = np.mean(d[female & (y_true == 1)])
-    tpr_m = np.mean(d[male & (y_true == 1)])
-    # FPR = P(D=1 | Y=0, A=a)
-    fpr_f = np.mean(d[female & (y_true == 0)])
-    fpr_m = np.mean(d[male & (y_true == 0)])
-
-    return {
-        "accept_all": accept_all,
-        "accept_female": accept_f,
-        "accept_male": accept_m,
-        "dp_gap": dp_gap,
-        "tpr_female": tpr_f,
-        "tpr_male": tpr_m,
-        "tpr_gap": tpr_f - tpr_m,
-        "fpr_female": fpr_f,
-        "fpr_male": fpr_m,
-        "fpr_gap": fpr_f - fpr_m,
-    }
 
 
 def main():
@@ -137,24 +102,18 @@ def main():
         )
 
     # Decision disagreement
-    d_r1 = (y_hat_r1 >= tau).astype(int)
-    d_r2 = (y_hat_r2 >= tau).astype(int)
-    disagree = d_r1 != d_r2
-    disagree_rate = np.mean(disagree)
-    disagree_f = np.mean(disagree[a == 0])
-    disagree_m = np.mean(disagree[a == 1])
-    n_disagree = int(disagree.sum())
+    dd = decision_disagreement(y_hat_r1, y_hat_r2, a, tau)
+    disagree_rate = dd["disagree_rate"]
+    disagree_f = dd["disagree_female"]
+    disagree_m = dd["disagree_male"]
+    n_disagree = dd["n_disagree"]
 
     print("\nDecision disagreement (R1 vs R2):")
     print(f"  Overall:  {disagree_rate:.3f} ({n_disagree} / {len(test)} applicants)")
-    print(f"  Female:   {disagree_f:.3f} ({int(disagree[a==0].sum())} / {(a==0).sum()})")
-    print(f"  Male:     {disagree_m:.3f} ({int(disagree[a==1].sum())} / {(a==1).sum()})")
-
-    # Who flips? (R1 grants but R2 denies, or vice versa)
-    r1_grant_r2_deny = (d_r1 == 1) & (d_r2 == 0)
-    r1_deny_r2_grant = (d_r1 == 0) & (d_r2 == 1)
-    print(f"  R1 grants, R2 denies: {r1_grant_r2_deny.sum()}")
-    print(f"  R1 denies, R2 grants: {r1_deny_r2_grant.sum()}")
+    print(f"  Female:   {disagree_f:.3f} ({dd['n_disagree_female']} / {(a==0).sum()})")
+    print(f"  Male:     {disagree_m:.3f} ({dd['n_disagree_male']} / {(a==1).sum()})")
+    print(f"  R1 grants, R2 denies: {dd['r1_grant_r2_deny']}")
+    print(f"  R1 denies, R2 grants: {dd['r1_deny_r2_grant']}")
 
     # PLOT: 1x2 figure (ROC + PR)
     plt.rcParams.update({"font.size": 12, "axes.titlesize": 13, "axes.labelsize": 12})

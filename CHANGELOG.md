@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `src/fairness.py` with `fairness_metrics` and `decision_disagreement` helpers
+  for demographic-parity / equal-opportunity gaps and receiver disagreement.
 - Apache 2.0 `LICENSE` + `NOTICE` with third-party data attribution (German
   Credit / OpenML `credit-g`, Chiappa 2019 DAG).
 - `data/README.md` documenting dataset provenance and the variable mapping.
@@ -19,8 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `pyproject.toml` packaging the engine with pinned dependencies, a `viz` extra
   for the plotting scripts, and Black/Ruff/mypy/pytest/coverage configuration.
 - `CITATION.cff` for software + the accompanying (forthcoming) paper.
-- `tests/` pytest suite covering `distances`, `linear_anm`, `perception`, and
-  `data_prep` (with the OpenML fetch mocked — no network access required).
+- `tests/` pytest suite covering `distances`, `linear_anm`, `perception`,
+  `data_prep`, and `fairness` (with the OpenML fetch mocked — no network access
+  required).
 - SPDX headers (`Copyright (c) 2026 José M. Álvarez` / `Apache-2.0`) on all
   Python source files.
 - GitHub Actions workflows (third-party actions pinned to SHA digests):

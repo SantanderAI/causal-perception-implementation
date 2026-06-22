@@ -111,6 +111,7 @@ src/
   linear_anm.py             # Linear ANM: DAGs, fit, do-operator, counterfactuals
   distances.py              # W2, KL (KDE), Total Variation between 1-D samples
   perception.py             # competing-SCM engine + bootstrap CIs
+  fairness.py               # DP/EO gaps and decision disagreement metrics
   run_*.py                  # experiment entrypoints (require the `viz` extra)
   plot_structural_combined.py
 tests/                      # pytest suite (OpenML fetch mocked — no network)
